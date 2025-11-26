@@ -1,0 +1,7 @@
+Exercicio 1 da Mentoria
+Numero: 923456789
+Plano: Pos-pago
+Dados consumidos: 6000MB
+Excedente em MB: 1000MB
+Valor a pagar: 15000.0
+-----------------------
