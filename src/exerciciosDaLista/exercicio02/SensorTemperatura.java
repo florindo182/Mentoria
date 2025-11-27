@@ -1,4 +1,4 @@
-package exerciciosDeFixacao;
+package exerciciosDaLista.exercicio02;
 
 public class SensorTemperatura {
     private String identificador;

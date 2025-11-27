@@ -4,12 +4,18 @@
  */
 package main;
 
-import exerciciosDeFixacao.ContaTelefonica;
-import exerciciosDeFixacao.SensorTemperatura;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import exerciciosDaLista.exercicio01.ContaTelefonica;
+import exerciciosDaLista.exercicio02.SensorTemperatura;
+import exerciciosDaLista.exercicio03.PedidoOnlineSimples;
+import exerciciosDaLista.exercicio04.Cliente;
+import exerciciosDaLista.exercicio04.Endereco;
+import exerciciosDaLista.exercicio05.Categoria;
+import exerciciosDaLista.exercicio05.Livro;
 
 /**
  *
@@ -24,6 +30,9 @@ public class Main {
         do { 
             System.out.println("1-Exercicio 1");
             System.out.println("2-Exercicio 2");
+            System.out.println("3-Exercicio 3");
+            System.out.println("4-Exercicio-4");
+            System.out.println("5-Exercicio-5");
 
             System.out.println("Digite uma opcao");
             opcao = sc.nextInt();
@@ -75,6 +84,109 @@ public class Main {
                     
                     System.out.println(sensor.toString());
 
+                }
+                case 3->{
+                    System.out.println("Digite o numero do pedido: ");
+                    String numeroPedido = sc.nextLine();
+
+                    System.out.println("Descreva o pedido: ");
+                    String descricaoPedido = sc.nextLine();
+
+                    System.out.println("Digite a quantidade:");
+                    int qtd = sc.nextInt();
+
+                    System.out.println("Digite o preco:");
+                    double preco = sc.nextDouble();
+
+                    PedidoOnlineSimples pedido = new PedidoOnlineSimples(descricaoPedido, numeroPedido,preco, qtd);
+
+                    pedido.marcarComoPago();
+                    pedido.marcarComoEnviado();
+
+                    System.out.println(pedido.toString());
+                    
+                }
+                case 4->{
+                    System.out.println("Digite a rua:");
+                    String rua = sc.nextLine();
+
+                    System.out.println("Digite o bairro:");
+                    String bairro = sc.nextLine();
+
+                    System.out.println("Digite a cidade:");
+                    String cidade = sc.nextLine();
+
+                    System.out.println("Digite o pais:");
+                    String pais = sc.nextLine();
+
+                    Endereco endereco = new Endereco(bairro, cidade, pais, rua);
+
+                    System.out.println("Digite o nome:");
+                    String nome = sc.nextLine();
+
+                    System.out.println("Digite o NIF:");
+                    String nif = sc.nextLine();
+
+                    System.out.println("Digite o telefone:");
+                    String telefone = sc.nextLine();
+
+                    Cliente cliente = new Cliente(endereco, nif, nome, telefone);
+
+                    System.out.println(cliente.toString());
+
+                    System.out.println("---Atualizar o Enderco---");
+
+                    System.out.println("Digite a rua:");
+                    rua = sc.nextLine();
+
+                    System.out.println("Digite o bairro:");
+                    bairro = sc.nextLine();
+
+                    System.out.println("Digite a cidade:");
+                    cidade = sc.nextLine();
+
+                    System.out.println("Digite o pais:");
+                    pais = sc.nextLine();
+
+                    Endereco novoEndereco = new Endereco(bairro, cidade, pais, rua);
+                    cliente.atualizarEndereco(novoEndereco);
+
+                    System.out.println(cliente.toString());
+                }
+                case 5->{
+                    System.out.println("Descreve a categoria:");
+                    String descricao = sc.nextLine();
+
+                    System.out.println("Digite o nome da categoria:");
+                    String nome = sc.nextLine();
+
+                    Categoria categoria1 = new Categoria(nome,descricao);
+
+                    System.out.println("Descreve a categoria:");
+                    descricao = sc.nextLine();
+
+                    System.out.println("Digite o nome da categoria:");
+                    nome = sc.nextLine();
+
+                    Categoria categoria2 = new Categoria(nome,descricao);
+
+                    System.out.println("Digite o titulo do livro:");
+                    String titulo = sc.nextLine();
+
+                    System.out.println("Digite o autor:");
+                    String autor = sc.nextLine();
+
+                    System.out.println("Digite o ano:");
+                    int ano = sc.nextInt();
+
+                    Livro livro1 = new Livro(ano, autor, categoria1, titulo);
+
+                    System.out.println(livro1.toString());
+
+                    livro1.alterarCategoria(categoria2);
+                    System.out.println(livro1.toString());
+
+                    
                 }
             }
 
