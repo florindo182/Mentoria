@@ -7,6 +7,7 @@ package main;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import exerciciosDaLista.exercicio01.ContaTelefonica;
@@ -16,6 +17,12 @@ import exerciciosDaLista.exercicio04.Cliente;
 import exerciciosDaLista.exercicio04.Endereco;
 import exerciciosDaLista.exercicio05.Categoria;
 import exerciciosDaLista.exercicio05.Livro;
+import exerciciosDaLista.exercicio07.Veiculo;
+import exerciciosDaLista.exercicio07.Camiao;
+import exerciciosDaLista.exercicio07.Carro;
+import exerciciosDaLista.exercicio006.Client;
+import exerciciosDaLista.exercicio006.Factura;
+
 
 /**
  *
@@ -33,6 +40,8 @@ public class Main {
             System.out.println("3-Exercicio 3");
             System.out.println("4-Exercicio-4");
             System.out.println("5-Exercicio-5");
+            System.out.println("6-Exercicio 6");
+            System.out.println("7-Exercicio 7");
 
             System.out.println("Digite uma opcao");
             opcao = sc.nextInt();
@@ -185,8 +194,45 @@ public class Main {
 
                     livro1.alterarCategoria(categoria2);
                     System.out.println(livro1.toString());
+                }
+                case 6->{
+                    System.out.println("Digite o nome: ");
+                    String nome = sc.nextLine();
 
-                    
+                    System.out.println("Digite o nif: ");
+                    String nif = sc.nextLine();
+
+                    System.out.println("Digite o numero de telefone: ");
+                    String telefone = sc.nextLine();
+
+                    Client cliente = new Client(nif,nome,telefone);
+
+                    System.out.println("Digite o numero da factura: ");
+                    String numero = sc.nextLine();
+
+                    System.out.println("Digite a data de Emissao: ");
+                    String dataEmissao = sc.nextLine();
+
+                    System.out.println("Digite o valor da factura: ");
+                    Double valor = sc.nextDouble();
+
+                    Factura fatura = new Factura(numero,dataEmissao,valor);
+                    fatura.associarCliente(cliente);
+
+                    System.out.println(fatura.toString());
+
+                }
+                case 7->{
+                    ArrayList<Veiculo> veiculo = new ArrayList<>();
+                    Carro carro = new Carro(4,5,"Toyota","Corolla","LD-10-20-AA");
+                    Camiao camiao = new Camiao(18.0,3,"Mercedes","Actros","LD-30-40-BB");
+
+                    veiculo.add(carro);
+                    veiculo.add(camiao);
+
+                    for(Veiculo e: veiculo){
+                        System.out.println(e);
+                    }
                 }
             }
 
