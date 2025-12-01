@@ -4,12 +4,8 @@
  */
 package main;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
-
+import exerciciosDaLista.exercicio006.Client;
+import exerciciosDaLista.exercicio006.Factura;
 import exerciciosDaLista.exercicio01.ContaTelefonica;
 import exerciciosDaLista.exercicio02.SensorTemperatura;
 import exerciciosDaLista.exercicio03.PedidoOnlineSimples;
@@ -17,11 +13,29 @@ import exerciciosDaLista.exercicio04.Cliente;
 import exerciciosDaLista.exercicio04.Endereco;
 import exerciciosDaLista.exercicio05.Categoria;
 import exerciciosDaLista.exercicio05.Livro;
-import exerciciosDaLista.exercicio07.Veiculo;
 import exerciciosDaLista.exercicio07.Camiao;
 import exerciciosDaLista.exercicio07.Carro;
-import exerciciosDaLista.exercicio006.Client;
-import exerciciosDaLista.exercicio006.Factura;
+import exerciciosDaLista.exercicio07.Veiculo;
+import exerciciosDaLista.exercicio08.CoordenadorCurso;
+import exerciciosDaLista.exercicio08.Professor;
+import exerciciosDeFixacao.seccao12.ClientF;
+import exerciciosDeFixacao.seccao12.Order;
+import exerciciosDeFixacao.seccao12.OrderItem;
+import exerciciosDeFixacao.seccao12.OrderStatus;
+import exerciciosDeFixacao.seccao12.Product;
+import exerciciosDeFixacao.seccao13_EX1.ImportedProduct;
+import exerciciosDeFixacao.seccao13_EX1.ProductF;
+import exerciciosDeFixacao.seccao13_EX1.UsedProduct;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
 
 
 /**
@@ -29,7 +43,7 @@ import exerciciosDaLista.exercicio006.Factura;
  * @author flori
  */
 public class Main {
-    public static void main(String[] args){  
+    public static void main(String[] args) throws ParseException{  
         Scanner sc = new Scanner(System.in);
         
         int opcao;
@@ -42,7 +56,9 @@ public class Main {
             System.out.println("5-Exercicio-5");
             System.out.println("6-Exercicio 6");
             System.out.println("7-Exercicio 7");
-
+            System.out.println("8-Exercicio 8");
+            System.out.println("9-Exercio de Fixacao- Seccao 12");
+            System.out.println("10-Exercicio de Fixacao- Seccao 13.1");
             System.out.println("Digite uma opcao");
             opcao = sc.nextInt();
 
@@ -115,7 +131,7 @@ public class Main {
                     System.out.println(pedido.toString());
                     
                 }
-                case 4->{
+                case 4->{   
                     System.out.println("Digite a rua:");
                     String rua = sc.nextLine();
 
@@ -233,6 +249,155 @@ public class Main {
                     for(Veiculo e: veiculo){
                         System.out.println(e);
                     }
+                }
+                case 8->{ 
+                    System.out.print("Nome: ");
+                    String nome = sc.nextLine();
+
+                    System.out.print("Documento: ");
+                    String documento = sc.nextLine();
+
+                    System.out.print("Area: ");
+                    String area = sc.nextLine();
+
+                    System.out.print("Salario Base: ");
+                    Double salarioBase = sc.nextDouble();
+
+                    System.out.print("Horas por semana: ");
+                    Integer qtdHoraPorSemana = sc.nextInt();
+
+                    Professor professor = new Professor(area, qtdHoraPorSemana, documento, nome, salarioBase);
+
+                    System.out.println(professor.toString());
+                    
+                    sc.nextLine();
+
+                    System.out.print("Nome: ");
+                    nome = sc.nextLine();
+
+                    System.out.print("Documento: ");
+                    documento = sc.nextLine();
+
+                    System.out.print("Responsavel do Curso: ");
+                    String cursoResponsavel = sc.nextLine();
+
+                    System.out.print("Salario Base: ");
+                    salarioBase = sc.nextDouble();
+
+                    System.out.print("Gratificacao da Coordenacao: ");
+                    Double gratificacaoCoordenacao = sc.nextDouble();
+
+                    CoordenadorCurso coordenador = new CoordenadorCurso(cursoResponsavel, gratificacaoCoordenacao, documento, nome, salarioBase);
+
+                    System.out.println(coordenador.toString());
+
+
+                }
+                case 9->{ 
+                    System.out.println("Enter client data:");
+                    System.out.print("Name: ");
+                    String name = sc.nextLine();
+                    
+                    System.out.print("Email: ");
+                    String email = sc.nextLine();
+                    
+                    System.out.print("Birth date(dd/MM/yyyy): ");
+                    String birthDate = sc.nextLine();
+                    
+                    LocalDate date = LocalDate.parse(birthDate,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+                   
+                    ClientF client = new ClientF(name,email,date);
+                    
+                    System.out.println("Enter order data:");
+                    System.out.print("Status: ");
+                    String os = sc.nextLine();
+                    OrderStatus os1 = OrderStatus.valueOf(os);
+                    
+                    System.out.print("How many items to this orders?");
+                    int num = sc.nextInt();
+                    
+                    Order order = new Order(new Date(),os1,client);
+                    
+                    sc.nextLine();
+                    for(int i = 1; i<= num; i++){
+                        System.out.println("Enter #" + i + " item data");
+                        System.out.print("Product name: ");
+                        name = sc.nextLine();
+                        
+                        System.out.print("Quantity: ");
+                        int qtd = sc.nextInt();
+                        
+                        System.out.print("Product Price: ");
+                        double price = sc.nextDouble();
+                        
+                        OrderItem orderItem = new OrderItem(qtd,price,new Product(name,price));
+                        order.addItem(orderItem);
+                        
+                        sc.nextLine();
+                    }
+                    
+                    
+                    System.out.println(order.toString());
+                    
+                }
+                case 10->{
+                    
+                    ArrayList<ProductF> products = new ArrayList<>();
+                    System.out.print("Enter the number of products?");
+                    int num = sc.nextInt();
+                    
+                    for(int i = 1; i<= num; i++){
+                        System.out.println("Product #" + i + " data");
+                        System.out.println("Common,used or imported (c/u/i)");
+                        char letra = sc.next().charAt(0);
+                        
+                        sc.nextLine();
+                        switch (letra) {
+                            case 'c' ->                                 {
+                                    System.out.print("Name: ");
+                                    String name = sc.nextLine();
+                                    System.out.print("Price: ");
+                                    double price = sc.nextDouble();
+                                    ProductF product = new ProductF(name,price);
+                                    products.add(product);
+                                    sc.nextLine();
+                                }
+                            case 'u' ->                                 {
+                                    System.out.print("Name: ");
+                                    String name = sc.nextLine();
+                                    System.out.print("Price: ");
+                                    double price = sc.nextDouble();
+                                    System.out.print("Manufacture date: ");
+                                    String data = sc.next();
+                                    
+                                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                                    LocalDate date = LocalDate.parse(data,formatter);
+                                    UsedProduct usedProduct = new UsedProduct(date,name,price);
+                                    
+                                    products.add(usedProduct);
+                                    sc.nextLine();
+                                }
+                            case 'i' ->                                 {
+                                    System.out.print("Name: ");
+                                    String name = sc.nextLine();
+                                    System.out.print("Price: ");
+                                    double price = sc.nextDouble();
+                                    System.out.print("Customs fee: ");
+                                    double customsFee = sc.nextDouble();
+                                    ImportedProduct importedProduct = new ImportedProduct(customsFee,name,price);
+                                    products.add(importedProduct);
+                                    sc.nextLine();
+                                }
+                            default -> System.out.println("Parametro Invalido");
+
+                        }
+                        
+                    }
+                    System.out.println("Price Tags: ");
+                    for(ProductF e: products){
+                        System.out.println(e.priceTag());
+                    }
+                    sc.nextLine();
                 }
             }
 
